@@ -8,6 +8,8 @@ class Example extends CI_Controller
     {
         parent:: __construct();
         $this->load->model('login_model');
+        $this->load->helper(array('form'));
+        $this->load->library('form_validation');
     }
 //register page
     public function index()
@@ -31,33 +33,68 @@ class Example extends CI_Controller
         $this->load->view('homepage');
     }
 //validate registration and inserting to database upon validation
+//    function validate_insert_users()
+//    {
+//        $username = $this->input->post('username');
+//        $email =    $this->input->post('email');
+//        $password = $this->input->post('password');
+//        $cpassword= $this->input->post('cpassword');
+//        if ($username && $email && $password && $cpassword) {
+//            if ($cpassword == $password) {
+//                if ($this->login_model->user_exists()==false){
+//                    $this->login_model->insert_user();
+//                    redirect('todo/signin');
+//
+//                }
+//                else{
+//                    $data['error']='username already exist';
+//                    $this->load->view('register_view',$data);
+//                }
+//
+//            } else {
+//                $data['error'] = 'your passwords doesn\'t match';
+//                $this->load->view('register_view', $data);
+//            }
+//        } else {
+//            $data['error'] = 'please enter all fields';
+//            $this->load->view('register_view', $data);
+//        }
+//    }
+
     function validate_insert_users()
-    {
-        $username = $this->input->post('username');
-        $email =    $this->input->post('email');
-        $password = $this->input->post('password');
-        $cpassword= $this->input->post('cpassword');
-        if ($username && $email && $password && $cpassword) {
-            if ($cpassword == $password) {
-                if ($this->login_model->user_exists()==false){
-                    $this->login_model->insert_user();
-                    redirect('todo/signin');
+  {
+      $this->form_validation->set_rules('username','Username','required|trim|min_length[5]|is_unique[reg_users.username]',array(                      'required'=>'Please supply your %s',
+              'min_length'=>'Please enter a %s not less than five characters',
+              'is_unique'=>'Username already exists'
+  ));
+   $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[reg_users.email]', array(
+            'required'=>'Please supply your %s',
+           'valid_email'=>'Please enter a valid %s address',
+           'is_unique'=>' Email already in use'
+       ));
+      $this->form_validation->set_rules('password','Password','required|min_length[5]',array(
 
-                }
-                else{
-                    $data['error']='username already exist';
-                    $this->load->view('register_view',$data);
-                }
+          'required'=>'You have to enter a %s',
+          'min_length'=>'Your %s  has be at least five characters'
+      ));
+      $this->form_validation->set_rules('cpassword',' Confirm Password','required|matches[password]',array(
 
-            } else {
-                $data['error'] = 'your passwords doesn\'t match';
-                $this->load->view('register_view', $data);
-            }
-        } else {
-            $data['error'] = 'please enter all fields';
-            $this->load->view('register_view', $data);
-        }
-    }
+          'required'=>'You have to enter %s',
+          'match'=>'Your passwords doesn\'t match '
+      ));
+
+      if ($this->form_validation->run() == FALSE)
+      {
+          $this->load->view('register_view');
+      }
+      else
+      {
+          $this->login_model->insert_user();
+          redirect('todo/signin');
+      }
+
+  }
+
 //validate login, upon entry: session starts( and cookie if enabled)
     public function  login()
     {
@@ -131,7 +168,5 @@ class Example extends CI_Controller
     }
 
 }
-
-
 
 ?>
