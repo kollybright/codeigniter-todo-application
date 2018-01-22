@@ -1,6 +1,6 @@
 What is this repository for?
 
-    This repository is majorly for web services, it's a MVC todo web based application written in codeigniter, whereby a user can create (event and time of the event),update and delete. There is a registration and user authentication page before a user can have access to their page.
+    This repository is majorly for web services, it's a MVC todo web based application written in codeigniter, whereby a user can create (events and time of the events),update and delete. There is a registration and user authentication page before a user can have access to their page.
     version 2.14.2.windows.3
 
 How do I get set up?
