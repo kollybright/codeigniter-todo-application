@@ -38,10 +38,10 @@
         a:hover{
             color: cyan;
         }
-        #php{
-            color: indianred;
-            font-size: 21px;
+        #error{
+            color: red;
         }
+
 
 
     </style>
@@ -49,19 +49,18 @@
 
 <body>
 <div class="container">
-
+    <h1>Login| <?php echo anchor('todo','Sign Up?','title="Sign up page"')?></h1>
     <form action="<?php echo site_url('todo/login') ?>" method="post">
-        <h1>Login| <?php echo anchor('todo','Sign Up','title="Sign up page"')?></h1>
         <div class="form-group">
             <div class="row">
                 <div class="col-sm-4">
                     <hr>
-                    <p id="php">
-                        <?php echo isset($error)?$error:''?>
-                    </p>
+                    <span id="error">
+                        <?php echo form_error('username')?>
+                    </span>
                     <hr>
                     <label for="username" class="form-">Username:</label>
-                    <input type="text" class="form-control" name="username" value="<?php echo  isset($_COOKIE['username']) ? $_COOKIE['username']: ''; ?>">
+                    <input type="text" class="form-control" name="username" value="<?php echo  isset($_COOKIE['username']) ? $_COOKIE['username']: set_value('username'); ?>">
                 </div>
             </div>
         </div>
@@ -69,19 +68,18 @@
             <div class="row">
                 <div class="col-sm-4">
                     <label for="password" class="form-">Password:</label>
-                    <input type="password" class="form-control" name="password" value="<?php  echo isset($_COOKIE['password'])?  $_COOKIE['password']: ''; ?>">
+                    <input type="password" class="form-control" name="password" value="<?php  echo isset($_COOKIE['password'])?  $_COOKIE['password']: set_value('password'); ?>">
                 </div>
             </div>
             <br>
             <!--            <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV"></div><br>-->
 
-            <input type="checkbox" name="rem" <?php echo  (isset($_COOKIE['username'])&& isset($_COOKIE['password'])) ?  "checked": '';?>> Remember me
+            <input type="checkbox" name="rem"
+                <?php echo  isset($_COOKIE['username']) ?  "checked":  ''?>> Remember me<?= set_checkbox('rem')?>
             <br>
         </div>
         <div class="form-group" id="butn">
             <input type="submit" class="btn btn-lg btn-success" value="Login" name="login">
-
-
         </div>
 
     </form>

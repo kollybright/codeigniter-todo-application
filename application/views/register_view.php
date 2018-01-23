@@ -36,10 +36,8 @@
             color:cyan;
         }
 
-  p{
+  .error{
       color: red;
-      font-size: 17px;
-      opacity: 0.65;
   }
 
     </style>
@@ -47,15 +45,14 @@
 
 <body>
 <div class="container">
+    <h1>Sign Up|<?php echo anchor('todo/signin','login?','title="login page"')?></h1>
     <?= form_open('todo/register') ?>
         <div class="form-group">
-            <h1>Sign Up|<?php echo anchor('todo/signin','Registered?','title="login page"')?></h1>
-
             <div class="row">
                 <div class="col-sm-5">
                     <label for="username" class="form-">Username:</label>
                     <input type="text" class="form-control" name="username" id="username" value="<?= set_value('username')?>">
-                    <p class="error"><?php echo form_error('username') ?></p>
+                    <span class="error"><?php echo form_error('username') ?></span>
                 </div>
 
             </div>
@@ -66,7 +63,7 @@
                 <div class="col-sm-5">
                     <label for="email">Email:</label>
                     <input type="email" class="form-control" name="email"  id="email"  value="<?= set_value('email')?>">
-                    <p class="error"><?php echo form_error('email') ?></p>
+                    <span class="error"><?php echo form_error('email') ?></span>
                 </div>
             </div>
         </div>
@@ -75,7 +72,7 @@
                 <div class="col-sm-5">
                     <label for="password">Password:</label>
                     <input type="password" class="form-control" name="password" id="password"  value="<?= set_value('password')?>">
-                    <p class="error"><?php echo form_error('password') ?></p>
+                    <span class="error"><?php echo form_error('password') ?></span>
                 </div>
             </div>
         </div>
@@ -86,7 +83,7 @@
                 <div class="col-sm-5">
                     <label for="cpassword">Confirm Password:</label>
                     <input type="password" class="form-control" name="cpassword" id="cpassword"  value="<?= set_value('cpassword')?>">
-                    <p class="error"><?php echo form_error('cpassword') ?></p>
+                    <span class="error"><?php echo form_error('cpassword') ?></span>
                 </div>
             </div>
         </div>

@@ -60,7 +60,3 @@ $route['todo/homepage']='Example/homepage';
 $route['todo/register']='Example/validate_insert_users';
 $route['todo/signin']='Example/signin';
 $route['todo/signin_error']='Example/signin_error';
-//$route['stud/add'] = 'Stud_Controller/add_student';
-//$route['stud/add_view'] = 'Stud_Controller/add_student_view';
-//$route['stud/edit/(\d+)'] = 'Stud_Controller/update_student_view/$1';
-//$route['stud/delete/(\d+)'] = 'Stud_Controller/delete_student/$1';

@@ -61,13 +61,12 @@ class Example extends CI_Controller
 //        }
 //    }
 
-    function validate_insert_users()
-  {
-      $this->form_validation->set_rules('username','Username','required|trim|min_length[5]|is_unique[reg_users.username]',array(                      'required'=>'Please supply your %s',
+    function validate_insert_users(){
+      $this->form_validation->set_rules('username','Username','required|trim|xss_clean|min_length[5]|is_unique[reg_users.username]',            array( 'required'=>'Please supply your %s',
               'min_length'=>'Please enter a %s not less than five characters',
               'is_unique'=>'Username already exists'
-  ));
-   $this->form_validation->set_rules('email','Email','required|valid_email|is_unique[reg_users.email]', array(
+        ));
+   $this->form_validation->set_rules('email','Email','required|valid_email|xss_clean|is_unique[reg_users.email]', array(
             'required'=>'Please supply your %s',
            'valid_email'=>'Please enter a valid %s address',
            'is_unique'=>' Email already in use'
@@ -80,7 +79,7 @@ class Example extends CI_Controller
       $this->form_validation->set_rules('cpassword',' Confirm Password','required|matches[password]',array(
 
           'required'=>'You have to enter %s',
-          'match'=>'Your passwords doesn\'t match '
+          'matches'=>'Your passwords doesn\'t match '
       ));
 
       if ($this->form_validation->run() == FALSE)
@@ -96,7 +95,7 @@ class Example extends CI_Controller
   }
 
 //validate login, upon entry: session starts( and cookie if enabled)
-    public function  login()
+ /*   public function  login()
     {
         $username = $this->input->post('username');
         $password = $this->input->post('password');
@@ -126,6 +125,40 @@ class Example extends CI_Controller
             $data['error'] = 'please enter both fields';
             $this->load->view('signin', $data);
         }
+    }*/
+    public  function  login(){
+        if ($this->session->userdata('currently_logged_in')){
+            redirect('todo/homepage');
+        }
+
+        $this->form_validation->set_rules('username', 'Username:', 'required|trim|xss_clean|callback_validation');
+        $this->form_validation->set_rules('password', 'Password:', 'required|trim');
+
+        if ($this->form_validation->run())
+        {
+            $data = array(
+                'username' => $this->input->post('username'),
+                'currently_logged_in' => 1
+            );
+            $this->session->set_userdata($data);
+            redirect('todo/homepage');
+        }
+        else {
+            $this->load->view('signin');
+        }
+    }
+
+
+    public function validation()
+    {
+        if ($this->login_model->log_in_correctly())
+        {
+
+            return true;
+        } else {
+            $this->form_validation->set_message('validation', 'Incorrect username/password.');
+            return false;
+        }
     }
 // user logout, session ended
     public function  logout()
@@ -136,17 +169,14 @@ class Example extends CI_Controller
     }
     //homepage loaded with data
     public function homepage(){
-        if ($this->session->userdata('username')){
+        if ($this->session->userdata('currently_logged_in')){
             $data['records']=$this->login_model->fetch_event();
-            $data['user']=$this->login_model->get_id();
+              $data['user']= $this->login_model->get_id();
             $this->load->view('homepage',$data);
-
         }
         else{
             redirect('todo/signin_error');
         }
-
-
     }
     // executing events insertion
     public  function  insert_event(){
@@ -158,15 +188,12 @@ class Example extends CI_Controller
     public  function  delete_event(){
         $this->login_model->delete_event();
         redirect('todo/homepage');
-
     }
     //executing event update
     public  function  update_event(){
         $this->login_model->update_event();
         redirect('todo/homepage');
-
     }
-
 }
 
 ?>

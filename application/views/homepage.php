@@ -12,8 +12,6 @@
     <link rel="stylesheet" type="text/css" href="<?php echo  base_url('/assets/style.css')?>">
     <script src="<?php echo base_url('assets/jquery-3.2.1.min.js')?>"></script>
     <script src="<?php  echo base_url('assets/js/bootstrap.min.js') ?>"></script>
-
-
 </head>
 <body>
 <header><a href="<?php echo site_url('todo/logout')?>" class="btn btn-primary btn-md" role="button" style="float: left">Logout</a>
