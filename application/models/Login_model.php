@@ -6,7 +6,7 @@ class Login_model extends CI_Model {
     }
     //checking if user already exist in the database
     public  function user_exists(){
-        $this->db->where('username',$this->input->post('username'));
+        $this->db->where('username',$this->input->post('username',TRUE));
         $query=$this->db->get('reg_users');
         if ($query->num_rows()!=0){
             return true;
@@ -18,17 +18,17 @@ class Login_model extends CI_Model {
     //inserting registered users into the database
      public  function  insert_user(){
          $form=array(
-             'username' =>$this->input->post ('username'),
-             'email'    =>$this->input->post('email'),
-             'password' =>md5($this->input->post('password'))
+             'username' =>$this->input->post ('username',TRUE),
+             'email'    =>$this->input->post('email',TRUE),
+             'password' =>md5($this->input->post('password',TRUE))
          );
          $this->db->insert('reg_users', $form);
      }
     //validating login from database
     public function log_in_correctly() {
 
-        $this->db->where('username', $this->input->post('username'));
-        $this->db->where('password', md5($this->input->post('password')));
+        $this->db->where('username', $this->input->post('username',TRUE));
+        $this->db->where('password', md5($this->input->post('password',TRUE)));
         $query = $this->db->get('reg_users');
 
         if ($query->num_rows()==1)
@@ -58,8 +58,8 @@ class Login_model extends CI_Model {
     //inserting events for the user whose session has started
      public  function  insert_event(){
          $data=array(
-             'event'=>$this->input->post('event'),
-             'the_time'=>$this->input->post('time'),
+             'event'=>$this->input->post('event',TRUE),
+             'the_time'=>$this->input->post('time',TRUE),
              'user_id'=>$this->get_id());
          $query=$this->db->insert('todo',$data);
          if($query){
@@ -72,15 +72,15 @@ class Login_model extends CI_Model {
      }
     //deleting events for the user whose session has started
      public  function  delete_event(){
-         $event_id=$this->input->post('event_id');
+         $event_id=$this->input->post('event_id',TRUE);
          $this->db->delete('todo','event_id='.$event_id);
 
      }
     //updating events for the user whose session has started
     public  function  update_event(){
-           $id=$this->input->post('id');
-        $event=$this->input->post('event');
-        $time= $this->input->post('time');
+           $id=$this->input->post('id',TRUE);
+        $event=$this->input->post('event',TRUE);
+        $time= $this->input->post('time',TRUE);
         $data = array(
             'event'=>"$event",
             'the_time'=>"$time"

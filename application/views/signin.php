@@ -6,6 +6,7 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <!--    <meta http-equiv="refresh" content="10">-->
+    <title>Sign In</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>"/>
     <!--    <link rel="stylesheet" type="text/css" href="style.css">-->
@@ -18,7 +19,7 @@
             width: 100%;
             margin: 0 auto;
             /*background:darkslategray;*/
-            background-color:#242429;
+            background-color:#245269;
             color: #ffffff;
 
         }
@@ -36,10 +37,10 @@
 
         }
         a:hover{
-            color: cyan;
+            color: mediumpurple;
         }
         #error{
-            color: red;
+            color: indianred;
         }
 
 
@@ -72,10 +73,10 @@
                 </div>
             </div>
             <br>
-            <!--            <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV"></div><br>-->
+            <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV" data-theme="dark"></div><br>
 
             <input type="checkbox" name="rem"
-                <?php echo  isset($_COOKIE['username']) ?  "checked":  ''?>> Remember me<?= set_checkbox('rem')?>
+                <?php echo  isset($_COOKIE['username']) ?  "checked":  ''?>> Remember me
             <br>
         </div>
         <div class="form-group" id="butn">
