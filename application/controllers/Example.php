@@ -63,36 +63,36 @@ class Example extends CI_Controller
 
     function validate_insert_users(){
       $this->form_validation->set_rules('username','Username','required|trim|xss_clean|min_length[5]|is_unique[reg_users.username]|regex_match[/^[a-zA-Z0-9_]+$/]',array(
-          'required'=>'Please supply your %s',
-          'min_length'=>'Please enter a %s not less than five characters',
-          'is_unique'=>'Username already exists',
-          'regex_match'=>'Only Alphanumeric  and underscore(_) is allowed for %s'
+          'required'=>'*Please supply your %s*',
+          'min_length'=>'*Please enter a %s not less than five characters*',
+          'is_unique'=>'*Username already exists*',
+          'regex_match'=>'*Only Alphanumeric  and underscore(_) is allowed for %s*'
         ));
    $this->form_validation->set_rules('email','Email','required|valid_email|xss_clean|is_unique[reg_users.email]', array(
-            'required'=>'Please supply your %s',
-           'valid_email'=>'Please enter a valid %s address',
-           'is_unique'=>' Email already in use'
+            'required'=>'*Please supply your %s*',
+           'valid_email'=>'*Please enter a valid %s address*',
+           'is_unique'=>'*%s already in use*'
        ));
       $this->form_validation->set_rules('password','Password','required|min_length[5]|regex_match[/^[a-zA-Z0-9]+$/]',array(
 
-          'required'=>'You have to enter a %s',
-          'min_length'=>'Your %s  has be at least five characters',
-          'regex_match'=>'Only Alphanumeric  and underscore(_)allowed is allowed for %s'
+          'required'=>'*You have to enter a %s *',
+          'min_length'=>'*Your %s  has to be at least five characters*',
+          'regex_match'=>'*Only Alphanumeric  and underscore(_) is allowed for %s*'
       ));
       $this->form_validation->set_rules('cpassword',' Confirm Password','required|matches[password]',array(
 
-          'required'=>'You have to enter %s',
-          'matches'=>'Your passwords doesn\'t match '
+          'required'=>'*You have to enter %s*',
+          'matches'=>'*Your passwords don\'t match*'
       ));
 
         if ($this->form_validation->run() == FALSE  && !($this->input->post('g-recaptcha-response')))
 
       {
-          $data['error']='please enter reCAPTCHA';
+          $data['error']='*please enter reCAPTCHA*';
           $this->load->view('register_view',$data);
       }
         else if ($this->form_validation->run() == TRUE  && !($this->input->post('g-recaptcha-response'))){
-            $data['error']='please enter reCAPTCHA';
+            $data['error']='*please enter reCAPTCHA*';
             $this->load->view('register_view',$data);
         }
         else if ($this->form_validation->run() == FALSE && $this->input->post('g-recaptcha-response')){
@@ -180,15 +180,15 @@ class Example extends CI_Controller
             return true;
         } else {
             if ($this->login_model->log_in_correctly() && !($this->input->post('g-recaptcha-response'))){
-                $this->form_validation->set_message('validation', 'Please enter the reCAPTCHA.');
+                $this->form_validation->set_message('validation', '*Please enter the reCAPTCHA.*');
                 return false;
             }
             else if($this->login_model->log_in_correctly()==false && $this->input->post('g-recaptcha-response')){
-            $this->form_validation->set_message('validation', 'Incorrect username/password.');
+            $this->form_validation->set_message('validation', '*Incorrect username/password.*');
                 return false;
             }
             else if ($this->login_model->log_in_correctly()==false && !($this->input->post('g-recaptcha-response'))){
-                $this->form_validation->set_message('validation', 'Incorrect username/password, please enter the ReCAPTCHA');
+                $this->form_validation->set_message('validation', '*Incorrect username/password *, *please enter the ReCAPTCHA*');
             }
             return false;
         }

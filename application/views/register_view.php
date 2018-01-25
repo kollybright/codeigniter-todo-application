@@ -38,7 +38,7 @@
         }
 
   .error{
-      color: indianred;
+      color:#FFCCCC;
 
   }
 
@@ -89,7 +89,7 @@
                 </div>
             </div>
         </div>
-                <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV" data-theme="dark"></div><p class="error"><?= isset($error)?$error:'';?></p><br>
+                <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV"></div><p class="error"><?= isset($error)?$error:'';?></p><br>
 
         <div class="form-group" >
             <input type="submit" class="btn btn-lg btn-success" value="Submit" id="submit" name="submit">

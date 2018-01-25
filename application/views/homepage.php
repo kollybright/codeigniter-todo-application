@@ -109,6 +109,9 @@
             $(window).scrollTop(0);
             $('#up').hide();
             $('#form1').css('visibility','visible');
+            $(this).animate({
+                width: '+=30px'
+            }, 1000);
             $('.edit').off('click').mouseenter(function(){
                 alert('please add events first or close to begin editing')
             });

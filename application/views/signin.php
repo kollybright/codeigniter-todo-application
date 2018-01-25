@@ -40,7 +40,7 @@
             color: mediumpurple;
         }
         #error{
-            color: indianred;
+            color: #FFCCCC;
         }
 
 
@@ -73,7 +73,7 @@
                 </div>
             </div>
             <br>
-            <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV" data-theme="dark"></div><br>
+            <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV" data-theme=""></div><br>
 
             <input type="checkbox" name="rem"
                 <?php echo  isset($_COOKIE['username']) ?  "checked":  ''?>> Remember me
