@@ -20,7 +20,8 @@
             height: 100%;
             width: 100%;
             /*background:darkslategray;*/
-            background-color: #245269;
+            /*background-color: #245269;*/
+            background-color: #122b40;
             color: #ffffff;
 
         }
@@ -34,11 +35,12 @@
         }
 
         a:hover{
-            color:mediumpurple;
+            color:darkcyan;
+            text-decoration: none;
         }
 
   .error{
-      color:#FFCCCC;
+      color:indianred;
 
   }
 
@@ -92,7 +94,7 @@
                 <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV"></div><p class="error"><?= isset($error)?$error:'';?></p><br>
 
         <div class="form-group" >
-            <input type="submit" class="btn btn-lg btn-success" value="Submit" id="submit" name="submit">
+            <input type="submit" class="btn btn-lg btn-primary" value="Submit" id="submit" name="submit">
         </div>
     </form>
 </div>

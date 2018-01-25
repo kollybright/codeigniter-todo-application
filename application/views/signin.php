@@ -19,7 +19,8 @@
             width: 100%;
             margin: 0 auto;
             /*background:darkslategray;*/
-            background-color:#245269;
+            background-color: #122b40;
+
             color: #ffffff;
 
         }
@@ -37,10 +38,12 @@
 
         }
         a:hover{
-            color: mediumpurple;
+            color:darkcyan;
+            text-decoration: none;
         }
         #error{
-            color: #FFCCCC;
+            /*color: #FFCCCC;*/
+            color: indianred;
         }
 
 
@@ -80,7 +83,7 @@
             <br>
         </div>
         <div class="form-group" id="butn">
-            <input type="submit" class="btn btn-lg btn-success" value="Login" name="login">
+            <input type="submit" class="btn btn-lg btn-primary" value="Login" name="login">
         </div>
 
     </form>
