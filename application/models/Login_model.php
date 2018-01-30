@@ -89,6 +89,11 @@ class Login_model extends CI_Model {
         $this->db->where("event_id", $id);
         $this->db->update("todo", $data);
     }
+    public function record_count() {
+        return $this->db->count_all("todo");
+    }
+
+   
 
 }
 ?>  

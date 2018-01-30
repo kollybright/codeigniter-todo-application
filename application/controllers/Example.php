@@ -8,8 +8,9 @@ class Example extends CI_Controller
     {
         parent:: __construct();
         $this->load->model('login_model');
-        $this->load->helper(array('form'));
-        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->load->library( array('form_validation','session'));
+//        $this->load->library("pagination");
     }
 //register page
     public function index()
@@ -32,7 +33,7 @@ class Example extends CI_Controller
     {
         $this->load->view('homepage');
     }
-//validate registration and inserting to database upon validation
+//validate registration and inserting to database
 //    function validate_insert_users()
 //    {
 //        $username = $this->input->post('username');
@@ -107,37 +108,6 @@ class Example extends CI_Controller
   }
 
 //validate login, upon entry: session starts( and cookie if enabled)
- /*   public function  login()
-    {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
-        $rem = $this->input->post('rem');
-        if ($username && $password) {
-            if ($this->login_model->log_in_correctly()) {
-                $this->session->set_userdata(array('username' => $this->input->post('username')));
-                if ($rem) {
-                    set_cookie('username', $this->input->post('username'), '3600');
-                    set_cookie('password', $this->input->post('password'), '3600');
-
-                } else {
-                    if (isset($_COOKIE['username'])) {
-                        delete_cookie('username');
-                    }
-                    if (isset($_COOKIE['password'])) {
-                        delete_cookie('password');
-                    }
-                }
-                redirect('todo/homepage');
-            } else {
-                $data['error'] = 'username and/or password incorrect';
-                $this->load->view('signin', $data);
-            }
-
-        } else {
-            $data['error'] = 'please enter both fields';
-            $this->load->view('signin', $data);
-        }
-    }*/
     public  function  login(){
         if ($this->session->userdata('currently_logged_in')){
             redirect('todo/homepage');
@@ -171,7 +141,8 @@ class Example extends CI_Controller
         }
     }
 
-
+//callback function for login validation: it confirms users from database and ensure user pass reCAPTCHA test from view
+// function log_in_correctly() is a function from login_model class that ensure exactly one user from database has  the username and password
     public function validation()
     {
         if ($this->login_model->log_in_correctly() && $this->input->post('g-recaptcha-response'))
@@ -228,6 +199,7 @@ class Example extends CI_Controller
         $this->login_model->update_event();
         redirect('todo/homepage');
     }
+
 }
 
 ?>

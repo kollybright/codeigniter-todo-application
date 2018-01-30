@@ -34,7 +34,7 @@
             <div class="panel panel-primary">
                 <div class="panel-heading">
                     <?php
-                    if($records==null){
+                    if($records==NULL){
                         ?>
                         <h4>It seems your events list is empty, you can add events.&nbsp;&nbsp;  click the blue
                             <span style="color:blue; font-size:larger">+</span> icon below</h4>

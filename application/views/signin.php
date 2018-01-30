@@ -64,7 +64,8 @@
                     </span>
                     <hr>
                     <label for="username" class="form-">Username:</label>
-                    <input type="text" class="form-control" name="username" value="<?php echo  isset($_COOKIE['username']) ? $_COOKIE['username']: set_value('username'); ?>">
+                    <?php ?>
+                    <input type="text" class="form-control" name="username" value="<?= set_value('username', isset($_COOKIE['username'])? $_COOKIE['username']:''); ?>">
                 </div>
             </div>
         </div>
@@ -72,14 +73,14 @@
             <div class="row">
                 <div class="col-sm-4">
                     <label for="password" class="form-">Password:</label>
-                    <input type="password" class="form-control" name="password" value="<?php  echo isset($_COOKIE['password'])?  $_COOKIE['password']: set_value('password'); ?>">
+                    <input type="password" class="form-control" name="password" value="<?= set_value('password', isset($_COOKIE['password'])? $_COOKIE['password']:''); ?>">
                 </div>
             </div>
             <br>
             <div class="g-recaptcha" data-sitekey="6LdXR0AUAAAAACmw0v5RI8ZjWyTuJyCY9hAaI8iV" data-theme=""></div><br>
 
             <input type="checkbox" name="rem"
-                <?php echo  isset($_COOKIE['username']) ?  "checked":  ''?>> Remember me
+                <?= set_checkbox('rem','on',isset($_COOKIE['username'])? TRUE:FALSE)?>> Remember me
             <br>
         </div>
         <div class="form-group" id="butn">
